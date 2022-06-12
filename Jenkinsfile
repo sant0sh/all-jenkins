@@ -13,7 +13,7 @@ Object msvc_variables = [
 	],
 ]
 
-getCustomInputParams()
+Object getCustomInputParams()
 {
 def defaultParams = []
     
