@@ -33,7 +33,7 @@ def call (Object msvc_variables) {
     if (msvc_variables['service_job_properties']['input_params'] != null && msvc_variables['service_job_properties']['input_params'] != "") {
         msvc_variables['service_job_properties']['input_params'].each { param ->
             //defaultParams = utils.addInputParameter (defaultParams, param)
-	    echo param
+	    print 'Adding parameter:' + param
         }
     }
 
