@@ -27,6 +27,7 @@ return defaultParams
 
 def call (Object msvc_variables) {
     echo msvc_variables.toString()
+    echo msvc_variables['service_job_properties']['env_vars']
 
 }
 
