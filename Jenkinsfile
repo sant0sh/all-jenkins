@@ -28,8 +28,14 @@ return defaultParams
 def call (Object msvc_variables) {
     echo msvc_variables.toString()
     echo msvc_variables['service_job_properties']['env_vars']
-    echo msvc_variables['service_job_properties']['input_params']
-
+    //echo msvc_variables['service_job_properties']['input_params']
+    
+    if (msvc_variables['service_job_properties']['input_params'] != null && msvc_variables['service_job_properties']['input_params'] != "") {
+        msvc_variables['service_job_properties']['input_params'].each { param ->
+            //defaultParams = utils.addInputParameter (defaultParams, param)
+	    echo param
+        }
+    }
 
 }
 
