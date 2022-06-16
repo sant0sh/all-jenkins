@@ -80,7 +80,7 @@ def generateWickedCLIReport(String dirName = ".") {
 			sh "echo Result1 > ${jobName}/index.html"
 			
 			//publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "Test_scan-results", reportFiles: "**/*", reportName: "Wicked CLI Report"])
-		        publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${jobName}", reportFiles: "**/*", reportName: "Twistlock_Scan_Report_for_${imageName}"])
+		        publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${jobName}", reportFiles: "**/*", reportName: "Twistlock Scan Report for ${imageName}"])
 		} catch (e) {
 			echo "Error: There was some issue while publishing the Wicked CLI HTML report."
 			throw e
