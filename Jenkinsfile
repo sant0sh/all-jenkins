@@ -77,8 +77,10 @@ def generateWickedCLIReport(String dirName = ".") {
 		sh "pwd; ls -al;"
 		sh "ls -al Test_scan-results"
 		try {
-			publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "Test_scan-results", reportFiles: "**/*", reportName: "Wicked CLI Report"])
-		
+			String jobName = "${env.JOB_NAME}/${currentBuild.displayName}"
+			String imageName= "actions"
+			//publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "Test_scan-results", reportFiles: "**/*", reportName: "Wicked CLI Report"])
+		        publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "/tmp/${jobName}", reportFiles: "**/*", reportName: "Twistlock_Scan_Report_for_${imageName}"])
 		} catch (e) {
 			echo "Error: There was some issue while publishing the Wicked CLI HTML report."
 			throw e
