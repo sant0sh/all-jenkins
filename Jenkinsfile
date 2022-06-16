@@ -81,6 +81,7 @@ def generateWickedCLIReport(String dirName = ".") {
 			sh "echo overview > ${jobName}/twistlock-scan-results-20220607-131140-415469488-UTC-b95e0aaa.overview.csv"
 			sh "echo all-results > ${jobName}/twistlock-scan-results-20220607-131140-415469488-UTC-b95e0aaa.results.csv"
 			sh "echo json-data > ${jobName}/twistlock-scan-results-20220607-131140-415469488-UTC-b95e0aaa.json"
+			sh "echo log-info > ${jobName}/tt.log"
 			
 			//publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "Test_scan-results", reportFiles: "**/*", reportName: "Wicked CLI Report"])
 		        publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${jobName}", reportFiles: "**/*", reportName: "Twistlock Scan Report for ${imageName}"])
