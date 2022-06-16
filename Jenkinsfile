@@ -1,3 +1,6 @@
+import com.cloudbees.groovy.cps.NonCPS
+import hudson.tasks.test.AbstractTestResultAction
+
 Object msvc_variables = [
 	// Properties for the service job only.
 	'service_job_properties': [
@@ -37,6 +40,15 @@ def call (Object msvc_variables) {
         }
     }
 
+}
+
+/*
+ * Method to publish HTML test results in HTML Publisher.
+ * @param reportsDir The relative or absolute path to where the HTML test reports are stored.
+ * @param reportName The name of the test report.
+ */
+void publishHTMLResults (String reportName, String reportsDir = ".", String filePattern = "**/*.html") {
+	publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: reportsDir, reportFiles: filePattern, reportName: reportName])
 }
 
 
