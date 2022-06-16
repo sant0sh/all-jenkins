@@ -75,8 +75,7 @@ def generateWickedCLIReport(String dirName = ".") {
 	}
 	dir ("wicked-cli-reports") {
 		sh "pwd; ls -al;"
-		sh "ls -al wicked-cli-reports"
-		sh "ls -al wicked-cli-reports/Test_scan-results"
+		sh "ls -al Test_scan-results"
 		try {
 			publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "Test_scan-results", reportFiles: "**/*", reportName: "Wicked CLI Report"])
 		
