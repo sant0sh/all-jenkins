@@ -40,7 +40,7 @@ def call (Object msvc_variables) {
 	    print 'Adding parameter:' + param
         }
     }
-	node("master")
+	node("linux")
 	{
           generateWickedCLIReport()
 
