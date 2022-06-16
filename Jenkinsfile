@@ -39,7 +39,7 @@ def call (Object msvc_variables) {
 	    print 'Adding parameter:' + param
         }
     }
-    publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "Test_scan-results", reportFiles: "**/*", reportName: "Wicked CLI Report"])
+    generateWickedCLIReport()
 }
 
 /*
@@ -51,7 +51,35 @@ void publishHTMLResults (String reportName, String reportsDir = ".", String file
 	publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: reportsDir, reportFiles: filePattern, reportName: reportName])
 }
 
-
+/**
+ * Generates Wicked CLI scan reports for a given service
+ * @param dirName The name of the directory to scan
+ * @return nothing
+ */
+def generateWickedCLIReport(String dirName = ".") {
+	try {
+		dirName = dirName.trim()
+		sh "mkdir wicked-cli-reports"
+                sh "echo Result1 > wicked-cli-reports/Result1.html"
+		//sh "wicked-cli -s ${dirName} -p Test -o wicked-cli-reports"
+		
+	} catch (e) {
+		//sh "cat wicked_cli.log"
+		echo "Error: There were issues while generating the wicked cli scan report."
+		throw e
+	}
+	dir ("wicked-cli-reports") {
+		sh "pwd; ls -al;"
+		sh "ls -al Test_scan-results;"
+		try {
+			publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "Test_scan-results", reportFiles: "**/*", reportName: "Wicked CLI Report"])
+		
+		} catch (e) {
+			echo "Error: There was some issue while publishing the Wicked CLI HTML report."
+			throw e
+		}
+	}
+}
 // Main starts here
 
 call(msvc_variables)
