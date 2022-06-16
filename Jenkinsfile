@@ -39,7 +39,7 @@ def call (Object msvc_variables) {
 	    print 'Adding parameter:' + param
         }
     }
-
+    publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "Test_scan-results", reportFiles: "**/*", reportName: "Wicked CLI 
 }
 
 /*
