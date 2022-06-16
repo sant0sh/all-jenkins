@@ -1,5 +1,6 @@
 import com.cloudbees.groovy.cps.NonCPS
 import hudson.tasks.test.AbstractTestResultAction
+import hudson.model.*
 
 Object msvc_variables = [
 	// Properties for the service job only.
@@ -39,7 +40,11 @@ def call (Object msvc_variables) {
 	    print 'Adding parameter:' + param
         }
     }
-    generateWickedCLIReport()
+	node("master")
+	{
+          generateWickedCLIReport()
+
+	}
 }
 
 /*
