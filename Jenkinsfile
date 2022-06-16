@@ -64,8 +64,8 @@ void publishHTMLResults (String reportName, String reportsDir = ".", String file
 def generateWickedCLIReport(String dirName = ".") {
 	try {
 		dirName = dirName.trim()
-		sh "mkdir wicked-cli-reports"
-                sh "echo Result1 > wicked-cli-reports/Result1.html"
+		sh "mkdir -p wicked-cli-reports/Test_scan-results"
+                sh "echo Result1 > wicked-cli-reports/Test_scan-results/Result1.html"
 		//sh "wicked-cli -s ${dirName} -p Test -o wicked-cli-reports"
 		
 	} catch (e) {
@@ -75,7 +75,8 @@ def generateWickedCLIReport(String dirName = ".") {
 	}
 	dir ("wicked-cli-reports") {
 		sh "pwd; ls -al;"
-		sh "ls -al Test_scan-results;"
+		sh "ls -al wicked-cli-reports"
+		sh "ls -al wicked-cli-reports/Test_scan-results"
 		try {
 			publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "Test_scan-results", reportFiles: "**/*", reportName: "Wicked CLI Report"])
 		
