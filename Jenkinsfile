@@ -86,13 +86,13 @@ def generateWickedCLIReport(String dirName = ".") {
 		// Add logic to change files names
 		// twistlock-20220517-<microservice>-<RELbuildversion>
 		
-		sh "common_file_name="`ls /tmp/${jobName}/*.results.csv`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%m/%d/%Y')-${imageName}-${overrideTag}.results.csv"
-		sh "common_file_name="`ls /tmp/${jobName}/*.metadata.csv`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%m/%d/%Y')-${imageName}-${overrideTag}.metadata.csv"
-	        sh "common_file_name="`ls /tmp/${jobName}/*.overview.csv`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%m/%d/%Y')-${imageName}-${overrideTag}.overview.csv"
-	        sh "common_file_name="`ls /tmp/${jobName}/*.json`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%m/%d/%Y')-${imageName}-${overrideTag}.json"
+		sh "common_file_name="`ls /tmp/${jobName}/*.results.csv`";echo ${common_file_name};ren $common_file_name twistlock-$(date +'%m/%d/%Y')-${imageName}-${overrideTag}.results.csv"
+		#sh "common_file_name="`ls /tmp/${jobName}/*.metadata.csv`"; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%m/%d/%Y')-${imageName}-${overrideTag}.metadata.csv"
+	        #sh "common_file_name="`ls /tmp/${jobName}/*.overview.csv`"; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%m/%d/%Y')-${imageName}-${overrideTag}.overview.csv"
+	        #sh "common_file_name="`ls /tmp/${jobName}/*.json`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%m/%d/%Y')-${imageName}-${overrideTag}.json"
 	
 		//
-		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "/tmp/${jobName}", reportFiles: "**/*", reportName: "TwistlockScanReport-${imageName}"])
+		//publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "/tmp/${jobName}", reportFiles: "**/*", reportName: "TwistlockScanReport-${imageName}"])
 		
 	} catch (e) {
 		//sh "cat wicked_cli.log"
