@@ -115,7 +115,8 @@ def generateWickedCLIReport(String dirName = ".") {
 def findFileWithExtension(String path, String ext)
 {
      new File(path).traverse(type: FILES) { it ->
-	     String fileName=it.getName()
+     String fileName=it.getName()
+     println fileName
      if(fileName.contains(ext))
      {
          return fileName
