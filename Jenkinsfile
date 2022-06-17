@@ -72,8 +72,8 @@ def generateWickedCLIReport(String dirName = ".") {
 	try {
 		sh "pwd"
 		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}"
-		sh "ls ${WORKSPACE}"
-		sh "cp -r ${WORKSPACE}/output_files/* ${resultsWorkspace}/"
+		sh "ls ${WORKSPACE}/TestPipelinesJob"
+		sh "cp -r ${WORKSPACE}/TestPipelinesJob/output_files/* ${resultsWorkspace}/"
 		sh "cd ${resultsWorkspace}"
 		sh "pwd; ls -al;"
 		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${jobName}", reportFiles: "**/*", reportName: "TwistlockScanReport-${imageName}"])
