@@ -65,6 +65,7 @@ def generateWickedCLIReport(String dirName = ".") {
 	
 	String jobName = "fedramp-compliance-scans/fedramp_compliance_scans/Dev_19"
 	String imageName= "actions"
+	String gitWorkspace= "/var/jenkins_home/workspace/TestPipelinesJob@script"
 	dirName = dirName.trim()
 	jobName = jobName.trim().replaceAll(" ", "_")
 	String resultsWorkspace= "/tmp/" + jobName
@@ -73,9 +74,9 @@ def generateWickedCLIReport(String dirName = ".") {
 		sh "env"
 		sh "pwd"
 		sh "rm -rf ${WORKSPACE}; mkdir -p ${WORKSPACE}"
-		sh "ls ${WORKSPACE_TMP}/*/${JOB_BASE_NAME}"
+		sh "ls ${resultsWorkspace}/*/"
 		
-		sh "cp -r ${WORKSPACE_TMP}/*/${JOB_BASE_NAME}/* ${WORKSPACE}/" 
+		sh "cp -r ${gitWorkspace}/*/ ${WORKSPACE}/" 
 		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}"
 		sh "ls ${WORKSPACE}"
 		sh "cp -r ${WORKSPACE}/output_files/* ${resultsWorkspace}/"
