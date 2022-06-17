@@ -69,6 +69,8 @@ def generateWickedCLIReport(String dirName = ".") {
 	try {
 		dirName = dirName.trim()
 		jobName = jobName.trim().replaceAll(" ", "_")
+		sh "pwd"
+		sh "ls /"
 		sh "rm -rf wicked-cli-reports; mkdir wicked-cli-reports"
 	        sh "mkdir -p ${jobName};"
 		sh "cp -r output_files/* ${jobName}/"
