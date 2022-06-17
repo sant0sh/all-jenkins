@@ -122,6 +122,8 @@ def findFileWithExtension(String path, String ext)
      println fileName
      if(fileName.endsWith(ext))
      {
+	 println "file is found:"
+	 print fileName
          return fileName
      }
     }
