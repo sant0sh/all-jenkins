@@ -116,8 +116,9 @@ def findFileWithExtension(String path, String ext)
 {
      new File(path).traverse(type: FILES) { it ->
      String fileName=it.getName()
+     println "file is:"
      println fileName
-     if(fileName.contains(ext))
+     if(fileName.endsWith(ext))
      {
          return fileName
      }
