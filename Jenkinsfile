@@ -63,7 +63,7 @@ void publishHTMLResults (String reportName, String reportsDir = ".", String file
  */
 def generateWickedCLIReport(String dirName = ".") {
 	
-	String jobName = "Dev_19"
+	String jobName = "Dev_" + ${BUILD_ID}
 	String imageName= "actions"
 	String gitWorkspace= "/var/jenkins_home/workspace/TestPipelinesJob@script"
 	dirName = dirName.trim()
@@ -73,7 +73,7 @@ def generateWickedCLIReport(String dirName = ".") {
 	try {
 		sh "env"
 		sh "pwd"
-		sh "rm -rf /tmp/${jobName}; mkdir -p /tmp/${jobName}"
+		sh "rm -rf /tmp/Dev_*; mkdir -p /tmp/${jobName}"
 		sh "rm -rf ${WORKSPACE}; mkdir -p ${WORKSPACE}"
 		sh "ls ${gitWorkspace}/*/"
 		
@@ -81,7 +81,9 @@ def generateWickedCLIReport(String dirName = ".") {
 		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}/${jobName}"
 		sh "ls ${WORKSPACE}"
 		sh "cp -r ${WORKSPACE}/output_files/* /tmp/${jobName}/"
+		// Add logic to change files names
 		
+		//
 		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "/tmp/${jobName}", reportFiles: "**/*", reportName: "TwistlockScanReport-${imageName}"])
 		
 	} catch (e) {
