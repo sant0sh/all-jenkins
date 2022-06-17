@@ -86,7 +86,7 @@ def generateWickedCLIReport(String dirName = ".") {
 		// Add logic to change files names
 		// twistlock-20220517-<microservice>-<RELbuildversion>
 		
-		sh "a=5;b=5; echo $a and $b"
+		sh "a=5; b=5; echo ${a} and ${b}"
 		//sh "common_file_name=\"`ls /tmp/${jobName}/*.results.csv`\";echo ${common_file_name};ren $common_file_name twistlock-$(date +'%y%m%d')-${imageName}-${overrideTag}.results.csv"
 		//sh "common_file_name=`ls /tmp/${jobName}/*.metadata.csv`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%y%m%d')-${imageName}-${overrideTag}.metadata.csv"
 	        //sh "common_file_name=`ls /tmp/${jobName}/*.overview.csv`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%y%m%d')-${imageName}-${overrideTag}.overview.csv"
