@@ -62,6 +62,7 @@ void publishHTMLResults (String reportName, String reportsDir = ".", String file
  * @return nothing
  */
 def generateWickedCLIReport(String dirName = ".") {
+	
 	String jobName = "${env.JOB_NAME}/${currentBuild.displayName}"
 	String imageName= "actions"
 	
@@ -70,7 +71,10 @@ def generateWickedCLIReport(String dirName = ".") {
 		jobName = jobName.trim().replaceAll(" ", "_")
 		sh "rm -rf wicked-cli-reports; mkdir wicked-cli-reports"
 	        sh "mkdir -p ${jobName};"
-		sh "cp -r output_files/* > ${jobName}/"
+		sh "cp -r output_files/* ${jobName}/"
+		sh "ls output_files"
+		sh "ls ${jobName}"
+		
 	} catch (e) {
 		//sh "cat wicked_cli.log"
 		echo "Error: There were issues while generating the wicked cli scan report."
