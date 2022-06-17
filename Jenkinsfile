@@ -72,13 +72,14 @@ def generateWickedCLIReport(String dirName = ".") {
 	try {
 		sh "env"
 		sh "pwd"
+		sh "rm -rf ${WORKSPACE}; mkdir -p ${WORKSPACE}"
+		sh "cp -r ${WORKSPACE_TMP}/*/${JOB_BASE_NAME}/* ${WORKSPACE}/" 
 		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}"
 		sh "ls ${WORKSPACE}"
-		sh "ls ${WORKSPACE}/TestPipelinesJob"
 		sh "cp -r ${WORKSPACE}/output_files/* ${resultsWorkspace}/"
 		//sh "cd ${resultsWorkspace}"
 		sh "pwd; ls -al;"
-		//publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${jobName}", reportFiles: "**/*", reportName: "TwistlockScanReport-${imageName}"])
+		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${jobName}", reportFiles: "**/*", reportName: "TwistlockScanReport-${imageName}"])
 		
 	} catch (e) {
 		//sh "cat wicked_cli.log"
