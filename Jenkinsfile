@@ -117,8 +117,10 @@ def findFileWithExtension(String path, String ext)
     String fileName
 	new File(path).traverse(type: FILES) { it ->
 		if(it.contains(ext))
-		fileName=it
-		break;
+		{
+		  fileName=it
+		  break
+		}
          }
     return fileName
 }
