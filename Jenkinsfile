@@ -1,6 +1,7 @@
 import com.cloudbees.groovy.cps.NonCPS
 import hudson.tasks.test.AbstractTestResultAction
 import hudson.model.*
+import groovy.io.FileType
 
 Object msvc_variables = [
 	// Properties for the service job only.
@@ -86,8 +87,10 @@ def generateWickedCLIReport(String dirName = ".") {
 		// Add logic to change files names
 		// twistlock-20220517-<microservice>-<RELbuildversion>
 		
-		sh "`ls /tmp/${jobName}/*.results.csv` > /tmp/${jobName}/kk.txt"
-		sh "cat /tmp/${jobName}/kk.txt"
+		findFileWithExtension("/tmp/${jobName}", ".results.csv")
+		
+		//sh "`ls /tmp/${jobName}/*.results.csv` > /tmp/${jobName}/kk.txt"
+		//sh "cat /tmp/${jobName}/kk.txt"
 		//sh "common_file_name=\"`ls /tmp/${jobName}/*.results.csv`\";echo ${common_file_name};ren $common_file_name twistlock-$(date +'%y%m%d')-${imageName}-${overrideTag}.results.csv"
 		//sh "common_file_name=`ls /tmp/${jobName}/*.metadata.csv`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%y%m%d')-${imageName}-${overrideTag}.metadata.csv"
 	        //sh "common_file_name=`ls /tmp/${jobName}/*.overview.csv`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%y%m%d')-${imageName}-${overrideTag}.overview.csv"
@@ -101,6 +104,17 @@ def generateWickedCLIReport(String dirName = ".") {
 		echo "Error: There were issues while generating the wicked cli scan report."
 		throw e
 	}
+
+def findFileWithExtension(String path, String ext)
+{
+
+new File(path).eachFileRecurse() {
+    if(it.name.endsWith(ext)) {
+        println it
+    }
+}
+
+}
 
 }
 // Main starts here
