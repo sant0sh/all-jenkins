@@ -1,0 +1,25 @@
+"images"
+
+"","all"
+"","count:1","image#","image"
+"","","1","sec-cloud-identity-builds-docker-local.artifactory.swg-devops.com/actions:Rel_98"
+
+"","resultsMissing"
+"","count:0"
+
+"","resultsExcluded"
+"","count:0"
+
+"","resultsIncluded.noScanErrors"
+"","count:1","image#","image"
+"","","1","sec-cloud-identity-builds-docker-local.artifactory.swg-devops.com/actions:Rel_98"
+
+"results"
+
+"","imagesIncluded"
+"","count:1","image#","image","complianceFailureSummary","vulnerabilityFailureSummary","scanTime","scanID","scanVersion","scanConsole","scanConsoleProject","scanIntelligenceTime","imagePullServer","imagePullServerHostname","elapsedTimeTwistlockAPIResults","elapsedTimeTwistcliScan","elapsedTimeDockerPull"
+"","","1","sec-cloud-identity-builds-docker-local.artifactory.swg-devops.com/actions:Rel_98","C:0|H:1|M:0|L:0|T:1","C:9|H:27|M:195|L:84|T:315","2022-06-07T13:12:40.91Z","629f4ec88683317a99fda00a","21.08.514","sc-public-1.cp-cts-twistlock.svc.cluster.local:8183","sc-public-1","2022-06-06T19:26:48.972Z","172.30.62.146","apipull-public-1","1 second","4 seconds","45 seconds"
+
+"","totals"
+"","complianceFailureSummary","C:0|H:1|M:0|L:0|T:1"
+"","vulnerabilityFailureSummary","C:9|H:27|M:195|L:84|T:315"
