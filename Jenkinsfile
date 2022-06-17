@@ -112,7 +112,6 @@ def generateWickedCLIReport(String dirName = ".") {
 
 }
 
-@NonCPS
 String findFileWithExtension(String path, String ext)
 {
      String fileName="None"
