@@ -70,6 +70,7 @@ def generateWickedCLIReport(String dirName = ".") {
 	String resultsWorkspace= "/tmp/" + jobName
 	
 	try {
+		sh "env"
 		sh "pwd"
 		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}"
 		sh "ls ${WORKSPACE}/TestPipelinesJob"
