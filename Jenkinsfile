@@ -109,11 +109,12 @@ def generateWickedCLIReport(String dirName = ".") {
 
 }
 
+@NonCPS
 def findFileWithExtension(String path, String ext)
 {
-def directory = new File(path)
-def fileName = new FileNameFinder().getFileNames(directory, ext)
-print fileName
+  def directory = new File(path)
+  def fileName = new FileNameFinder().getFileNames(directory, ext)
+  print fileName
 }
 
 // Main starts here
