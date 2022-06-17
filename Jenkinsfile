@@ -63,7 +63,7 @@ void publishHTMLResults (String reportName, String reportsDir = ".", String file
  */
 def generateWickedCLIReport(String dirName = ".") {
 	
-	String jobName = "Dev_" + ${BUILD_ID}
+	String jobName = "Dev_${BUILD_ID}"
 	String imageName= "actions"
 	String gitWorkspace= "/var/jenkins_home/workspace/TestPipelinesJob@script"
 	dirName = dirName.trim()
