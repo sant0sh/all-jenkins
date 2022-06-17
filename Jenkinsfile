@@ -64,6 +64,7 @@ void publishHTMLResults (String reportName, String reportsDir = ".", String file
 def generateWickedCLIReport(String dirName = ".") {
 	
 	String jobName = "Dev_${BUILD_ID}"
+	String overrideTag = "Rel_98"
 	String imageName= "actions"
 	String gitWorkspace= "/var/jenkins_home/workspace/TestPipelinesJob@script"
 	dirName = dirName.trim()
@@ -83,7 +84,13 @@ def generateWickedCLIReport(String dirName = ".") {
 		sh "cp -r ${WORKSPACE}/output_files/* /tmp/${jobName}/"
 		sh "ls /tmp/${jobName}/"
 		// Add logic to change files names
+		// twistlock-20220517-<microservice>-<RELbuildversion>
 		
+		sh "common_file_name="`ls /tmp/${jobName}/*.results.csv`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%m/%d/%Y')-${imageName}-${overrideTag}.results.csv"
+		sh "common_file_name="`ls /tmp/${jobName}/*.metadata.csv`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%m/%d/%Y')-${imageName}-${overrideTag}.metadata.csv"
+	        sh "common_file_name="`ls /tmp/${jobName}/*.overview.csv`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%m/%d/%Y')-${imageName}-${overrideTag}.overview.csv"
+	        sh "common_file_name="`ls /tmp/${jobName}/*.json`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%m/%d/%Y')-${imageName}-${overrideTag}.json"
+	
 		//
 		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "/tmp/${jobName}", reportFiles: "**/*", reportName: "TwistlockScanReport-${imageName}"])
 		
