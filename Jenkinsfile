@@ -81,6 +81,7 @@ def generateWickedCLIReport(String dirName = ".") {
 		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}/${jobName}"
 		sh "ls ${WORKSPACE}"
 		sh "cp -r ${WORKSPACE}/output_files/* /tmp/${jobName}/"
+		sh "ls /tmp/${jobName}/"
 		// Add logic to change files names
 		
 		//
