@@ -113,7 +113,7 @@ def generateWickedCLIReport(String dirName = ".") {
 def findFileWithExtension(String path, String ext)
 {
 
-	new File(parentPath).traverse(type: FILES, nameFilter: ~/.results.csv/) { it ->
+	new File(parentPath).traverse(type: FILES) { it ->
           println it
          }
 }
