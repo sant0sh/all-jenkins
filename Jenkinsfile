@@ -89,7 +89,9 @@ def generateWickedCLIReport(String dirName = ".") {
 		// Add logic to change files names
 		// twistlock-20220517-<microservice>-<RELbuildversion>
 		
-		findFileWithExtension("/tmp/${jobName}", ".results.csv")
+		String results_file=findFileWithExtension("/tmp/${jobName}", ".results.csv")
+		
+		print results_file
 		
 		//sh "`ls /tmp/${jobName}/*.results.csv` > /tmp/${jobName}/kk.txt"
 		//sh "cat /tmp/${jobName}/kk.txt"
@@ -112,10 +114,13 @@ def generateWickedCLIReport(String dirName = ".") {
 @NonCPS
 def findFileWithExtension(String path, String ext)
 {
-
+    String fileName
 	new File(path).traverse(type: FILES) { it ->
-          println it
+		if(it.contains(ext))
+		fileName=it
+		break;
          }
+    return fileName
 }
 
 // Main starts here
