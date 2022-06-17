@@ -63,36 +63,26 @@ void publishHTMLResults (String reportName, String reportsDir = ".", String file
  */
 def generateWickedCLIReport(String dirName = ".") {
 	
-	String jobName = "${WORKSPACE}/${env.JOB_NAME}/${currentBuild.displayName}"
+	String jobName = "fedramp-compliance-scans/fedramp_compliance_scans/Dev_19"
 	String imageName= "actions"
+	String dirName = dirName.trim()
+	String jobName = jobName.trim().replaceAll(" ", "_")
+	String resultsWorkspace= "/tmp/" + jobName
 	
 	try {
-		dirName = dirName.trim()
-		jobName = jobName.trim().replaceAll(" ", "_")
-		
 		sh "pwd"
-		sh "ls ${WORKSPACE}/"
-		sh "rm -rf ${WORKSPACE}/wicked-cli-reports; mkdir ${WORKSPACE}/wicked-cli-reports"
-	        sh "mkdir -p ${jobName};"
-		sh "cp -r ${WORKSPACE}/output_files/* ${jobName}/wicked-cli-reports/"
-		sh "ls ${jobName}"
-		sh "cd ${WORKSPACE}"
+		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}"
+		sh "cp -r ${WORKSPACE}/output_files/* ${resultsWorkspace}/"
+		sh "cd ${resultsWorkspace}"
+		sh "pwd; ls -al;"
+		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${jobName}", reportFiles: "**/*", reportName: "TwistlockScanReport-${imageName}"])
 		
 	} catch (e) {
 		//sh "cat wicked_cli.log"
 		echo "Error: There were issues while generating the wicked cli scan report."
 		throw e
 	}
-	dir ("wicked-cli-reports") {
-		sh "pwd; ls -al;"
-		try {
-			
-		        publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${jobName}", reportFiles: "**/*", reportName: "TwistlockScanReport-${imageName}"])
-		} catch (e) {
-			echo "Error: There was some issue while publishing the Wicked CLI HTML report."
-			throw e
-		}
-	}
+
 }
 // Main starts here
 
