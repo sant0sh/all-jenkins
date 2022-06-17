@@ -111,12 +111,9 @@ def generateWickedCLIReport(String dirName = ".") {
 
 def findFileWithExtension(String path, String ext)
 {
-new File(path).eachFileRecurse(FILES) {
-    print it
-    if(it.name.endsWith(ext)) {
-        println it
-    }
-}
+def directory = new File(path)
+def fileName = new FileNameFinder().getFileNames(directory, ext)
+print fileName
 }
 
 // Main starts here
