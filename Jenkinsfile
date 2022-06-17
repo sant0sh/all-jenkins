@@ -62,9 +62,15 @@ void publishHTMLResults (String reportName, String reportsDir = ".", String file
  * @return nothing
  */
 def generateWickedCLIReport(String dirName = ".") {
+	String jobName = "${env.JOB_NAME}/${currentBuild.displayName}"
+	String imageName= "actions"
+	
 	try {
 		dirName = dirName.trim()
+		jobName = jobName.trim().replaceAll(" ", "_")
 		sh "rm -rf wicked-cli-reports; mkdir wicked-cli-reports"
+	        sh "mkdir -p ${jobName};"
+		sh "cp -r output_files/* > ${jobName}/"
 	} catch (e) {
 		//sh "cat wicked_cli.log"
 		echo "Error: There were issues while generating the wicked cli scan report."
@@ -73,13 +79,6 @@ def generateWickedCLIReport(String dirName = ".") {
 	dir ("wicked-cli-reports") {
 		sh "pwd; ls -al;"
 		try {
-			String jobName = "${env.JOB_NAME}/${currentBuild.displayName}"
-			String imageName= "actions"
-			jobName = jobName.trim().replaceAll(" ", "_")
-	                sh "mkdir -p ${jobName};"
-			sh "echo cp -r output_files/* > ${jobName}/"
-			
-			
 			//publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "Test_scan-results", reportFiles: "**/*", reportName: "Wicked CLI Report"])
 		        publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${jobName}", reportFiles: "**/*", reportName: "TwistlockScanReport-${imageName}"])
 		} catch (e) {
