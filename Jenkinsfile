@@ -114,15 +114,12 @@ def generateWickedCLIReport(String dirName = ".") {
 @NonCPS
 def findFileWithExtension(String path, String ext)
 {
-    String fileName
-	new File(path).traverse(type: FILES) { it ->
-		if(it.contains(ext))
-		{
-		  fileName=it
-		  break
-		}
-         }
-    return fileName
+     new File(path).traverse(type: FILES) { it ->
+     if(it.contains(ext))
+     {
+         return it
+     }
+    }
 }
 
 // Main starts here
