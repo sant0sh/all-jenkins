@@ -105,6 +105,8 @@ def generateWickedCLIReport(String dirName = ".") {
 		throw e
 	}
 
+}
+
 def findFileWithExtension(String path, String ext)
 {
 
@@ -116,7 +118,6 @@ new File(path).eachFileRecurse() {
 
 }
 
-}
 // Main starts here
 
 call(msvc_variables)
