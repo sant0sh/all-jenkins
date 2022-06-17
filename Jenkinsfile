@@ -77,7 +77,7 @@ def generateWickedCLIReport(String dirName = ".") {
 		sh "ls ${gitWorkspace}/*/"
 		
 		sh "cp -r ${gitWorkspace}/*/* ${WORKSPACE}/" 
-		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}/${jobName}/"
+		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}/${jobName}"
 		sh "ls ${WORKSPACE}"
 		sh "cp -r ${WORKSPACE}/output_files/* ${resultsWorkspace}/${jobName}/"
 		sh "cd ${resultsWorkspace}"
