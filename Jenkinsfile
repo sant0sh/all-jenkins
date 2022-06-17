@@ -112,9 +112,10 @@ def generateWickedCLIReport(String dirName = ".") {
 @NonCPS
 def findFileWithExtension(String path, String ext)
 {
-  def directory = new File(path)
-  def fileName = new FileNameFinder().getFileNames(directory, ext)
-  print fileName
+
+	new File(parentPath).traverse(type: groovy.io.FileType.FILES, nameFilter: ~/.csv/) { it ->
+          println it
+         }
 }
 
 // Main starts here
