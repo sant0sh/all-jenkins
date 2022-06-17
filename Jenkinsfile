@@ -68,7 +68,7 @@ def generateWickedCLIReport(String dirName = ".") {
 	String gitWorkspace= "/var/jenkins_home/workspace/TestPipelinesJob@script"
 	dirName = dirName.trim()
 	jobName = jobName.trim().replaceAll(" ", "_")
-	String resultsWorkspace= "/tmp/fedramp-compliance-scans/fedramp_compliance_scans/" + jobName
+	String resultsWorkspace= "/tmp/fedramp-compliance-scans/fedramp_compliance_scans"
 	
 	try {
 		sh "env"
@@ -77,11 +77,12 @@ def generateWickedCLIReport(String dirName = ".") {
 		sh "ls ${gitWorkspace}/*/"
 		
 		sh "cp -r ${gitWorkspace}/*/* ${WORKSPACE}/" 
-		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}"
+		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}/${jobName}/"
 		sh "ls ${WORKSPACE}"
-		sh "cp -r ${WORKSPACE}/output_files/* ${resultsWorkspace}/"
+		sh "cp -r ${WORKSPACE}/output_files/* ${resultsWorkspace}/${jobName}/"
 		sh "cd ${resultsWorkspace}"
-		sh "pwd; ls -al;"
+		sh "pwd; ls -al; ls {jobName}"
+		
 		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${jobName}", reportFiles: "**/*", reportName: "TwistlockScanReport-${imageName}"])
 		
 	} catch (e) {
