@@ -66,7 +66,7 @@ def generateWickedCLIReport(String dirName = ".") {
 	String jobName = "fedramp-compliance-scans/fedramp_compliance_scans/Dev_19"
 	String imageName= "actions"
 	String dirName = dirName.trim()
-	String jobName = jobName.trim().replaceAll(" ", "_")
+	jobName = jobName.trim().replaceAll(" ", "_")
 	String resultsWorkspace= "/tmp/" + jobName
 	
 	try {
