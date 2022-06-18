@@ -158,14 +158,14 @@ def renameFile(String basePath, String sourceName, String targetName)
      }
 }
 
-def updateFileNameChangeReferences(String basePath, String fileName, String oldReference, String newReference)
+def updateFileNameChangeReferences(String sourcePath, String fileName, String oldReference, String newReference)
 {
    try {
-	   String cmd="sed -i " + "s/$oldReference/$newReference/g " + $basePath/$fileName
+	   String cmd="sed -i " + "s/$oldReference/$newReference/g " + $sourcePath/$fileName
 	   println "cmd=${cmd}"
            println  sh(script:cmd, returnStdout:true).trim()
        } catch (Exception ex) {
-	   println("Failed to update reference text ${newReference} in file ${basePath}/${fileName} : ${ex}")
+	   println("Failed to update reference text ${newReference} in file ${sourcePath}/${fileName} : ${ex}")
      }
 }
 
