@@ -96,7 +96,7 @@ def generateWickedCLIReport(String dirName = ".") {
 		String dateStamp = getDateStampFromTwistlockFile(results_file)
 		println "Date stamp on file name ${dateStamp}"
 		String microServiceName, version
-		[microServiceName, version] = getMicroServiceNameAndVersion(imageName)
+		(microServiceName, version) = getMicroServiceNameAndVersion(imageName)
 		println "Microservice : name ${microServiceName} and Version ${version}"
 		
 		//sh "`ls /tmp/${jobName}/*.results.csv` > /tmp/${jobName}/kk.txt"
