@@ -160,7 +160,7 @@ def getMicroServiceNameAndVersion(String imageName)
 def renameFile(String basePath, String sourceName, String targetName)
 {
    try {
-         println  sh(script:"rename ${basePath}/${sourceName} ${basePath}/${targetName}", returnStdout:true).trim()
+         println  sh(script:"mv ${basePath}/${sourceName} ${basePath}/${targetName}", returnStdout:true).trim()
        } catch (Exception ex) {
 	   println("Failed to rename file ${basePath}/${sourceName} to ${basePath}/${targetName} : ${ex}")
      }
