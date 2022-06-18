@@ -118,7 +118,7 @@ String findFileWithExtension(String path, String ext)
 	String fileNamePart1 = sh(script:"ls ${path}/*${ext}", returnStdout:true).trim()
 	String fileNamePart2 = fileNamePart1.substring(0, fileNamePart1.indexOf(ext))
         int lastSlashIndex = fileNamePart2.lastIndexOf('/') + 1
-        fileName = fileName.substring(lastSlashIndex)
+        fileName = fileNamePart2.substring(lastSlashIndex)
   
      } catch (Exception ex) {
 	println("Failed to search file with extension *${ext} on ${path} : ${ex}")
