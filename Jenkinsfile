@@ -151,6 +151,12 @@ String getDateStampFromTwistlockFile(String fileName)
    return dateStamp
 }
 
+def getMicroServiceNameAndVersion(String imageName)
+{
+	imageName="sec-cloud-identity-builds-docker-local.artifactory.swg-devops.com/actions:Rel_98"
+	
+	
+}
 // Main starts here
 
 call(msvc_variables)
