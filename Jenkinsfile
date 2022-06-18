@@ -88,8 +88,9 @@ def generateWickedCLIReport(String dirName = ".") {
 		sh "ls /tmp/${jobName}/"
 		// Add logic to change files names
 		// twistlock-20220517-<microservice>-<RELbuildversion>
-		
-		renameTwistlockResults("/tmp/${jobName}", imageName)
+	        String microServiceName, version
+	        (microServiceName, version) = getMicroServiceNameAndVersion(imageName)
+	        renameTwistlockResults("/tmp/${jobName}", microServiceName, version)
 	        
 		//
 		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, escapeUnderscores: false, reportDir: "/tmp/${jobName}", reportFiles: "**/*", reportName: "TwistlockReport-${microServiceName}-${version}"])
@@ -157,16 +158,13 @@ def renameFile(String basePath, String sourceName, String targetName)
      }
 }
 
-def renameTwistlockResults(String sourcePath, String imageName)
+def renameTwistlockResults(String sourcePath, String  microServiceName, String version)
 {
      def fileExtension = [".metadata.csv", ".overview.csv", ".results.csv", ".json"]
      for (int i = 0; i < fileExtension.size(); i++) {
          String reportFile=findFileWithExtension(sourcePath, fileExtension[i])
 	 String dateStamp = getDateStampFromTwistlockFile(reportFile)
 	 println "Date stamp on file name ${dateStamp}"
-	 String microServiceName, version
-	 (microServiceName, version) = getMicroServiceNameAndVersion(imageName)
-	 println "Microservice : name ${microServiceName} and Version ${version}"
 	 renameFile(sourcePath, reportFile + fileExtension[i], "twistlock-" + dateStamp + "-" + microServiceName + "-" + version + fileExtension[i])
 	}
 }
