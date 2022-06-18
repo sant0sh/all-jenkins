@@ -159,11 +159,11 @@ def renameFile(String basePath, String sourceName, String targetName)
 
 def renameTwistlockResults(String sourcePath, String imageName)
 {
-	String fileExtension[] = [".metadata.csv", ".overview.csv", ".results.csv", ".json"]
+	String[] fileExtension = [".metadata.csv", ".overview.csv", ".results.csv", ".json"]
 	
-	for (int i = 0, length = fileExtension.length; i < length; i++) {
+	for (int i = 0, length = ${fileExtension}.length; i < length; i++) {
 	    String reportFile=findFileWithExtension(${sourcePath}, ${fileExtension[i]})
-	    String dateStamp = getDateStampFromTwistlockFile(reportFile)
+	    String dateStamp = getDateStampFromTwistlockFile(${reportFile})
 	    println "Date stamp on file name ${dateStamp}"
 	    String microServiceName, version
 	    (microServiceName, version) = getMicroServiceNameAndVersion(imageName)
