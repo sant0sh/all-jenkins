@@ -92,6 +92,9 @@ def generateWickedCLIReport(String dirName = ".") {
 		String results_file=findFileWithExtension("/tmp/${jobName}", ".results.csv")
 		
 		println "File found ${results_file}"
+		String dateStamp = getDateStampFromTwistlockFile(results_file)
+		println "Date stamp on file name ${dateStamp}"
+		
 		
 		//sh "`ls /tmp/${jobName}/*.results.csv` > /tmp/${jobName}/kk.txt"
 		//sh "cat /tmp/${jobName}/kk.txt"
@@ -125,6 +128,18 @@ String findFileWithExtension(String path, String ext)
      }
    return fileName
  }
+
+String getDateStampFromTwistlockFile(String fileName)
+{
+   String dateStamp
+   try {
+        def splitValues = fileName.split('-')
+        dateStamp=splitValues[3]
+     } catch (Exception ex) {
+	   println("Failed to extract data stamp from the file ${fileName} : ${ex}")
+     }
+   return dateStamp
+}
 
 // Main starts here
 
