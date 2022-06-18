@@ -113,13 +113,12 @@ def generateWickedCLIReport(String dirName = ".") {
 
 String findFileWithExtension(String path, String ext)
 {
-try {
-	def dir1 = sh(script:"ls ${path}/${ext}", returnStdout:true).trim()
-	println dir1
-	return dir1
-} catch (Exception ex) {
-    println("Failed : ${ex}")
-}
+  try {
+	String fileName = sh(script:"ls ${path}/${ext}", returnStdout:true).trim()
+	return fileName
+     } catch (Exception ex) {
+	println("Failed to search file with extension ${ext} on ${path} : ${ex}")
+     }
 }
 
 // Main starts here
