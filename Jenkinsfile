@@ -167,7 +167,7 @@ def renameTwistlockResults(String sourcePath, String imageName)
 	 String microServiceName, version
 	 (microServiceName, version) = getMicroServiceNameAndVersion(imageName)
 	 println "Microservice : name ${microServiceName} and Version ${version}"
-	 renameFile(${sourcePath}, "${reportFile}${fileExtension[i]}", "twistlock-${dateStamp}-${microServiceName}-${version}${fileExtension[i]}")
+	 renameFile(${sourcePath}, ${reportFile}${fileExtension[i]}, "twistlock-${dateStamp}-${microServiceName}-${version}${fileExtension[i]}")
 	}
 }
 
