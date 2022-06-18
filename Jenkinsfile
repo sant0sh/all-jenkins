@@ -89,7 +89,7 @@ def generateWickedCLIReport(String dirName = ".") {
 		// Add logic to change files names
 		// twistlock-20220517-<microservice>-<RELbuildversion>
 		
-		String results_file=findFileWithExtension("/tmp/${jobName}", ".results.csv")
+		String results_file=findFileWithExtension("/tmp/${jobName}", "*.results.csv")
 		
 		println "File found"
 		println results_file
