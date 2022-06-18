@@ -95,6 +95,7 @@ def generateWickedCLIReport(String dirName = ".") {
 		println "File found ${results_file}"
 		String dateStamp = getDateStampFromTwistlockFile(results_file)
 		println "Date stamp on file name ${dateStamp}"
+		String microServiceName, version
 		[microServiceName, version] = getMicroServiceNameAndVersion(imageName)
 		println "Microservice : name ${microServiceName} and Version ${version}"
 		
