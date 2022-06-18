@@ -154,6 +154,17 @@ def getMicroServiceNameAndVersion(String imageName)
 	String version=microServiceNameAndVersion.split(':')[1]
 	return [microServiceName.trim(), version.trim()]
 }
+
+
+def renameFile(String basePath, String sourceName, String targetName)
+{
+   try {
+         println  sh(script:"ren ${basePath}/${sourceName} ${basePath}/${targetName}", returnStdout:true).trim()
+       } catch (Exception ex) {
+	   println("Failed to rename file ${basePath}/${sourceName} to ${basePath}/${targetName} : ${ex}")
+     }
+}
+
 // Main starts here
 
 call(msvc_variables)
