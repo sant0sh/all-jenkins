@@ -161,7 +161,7 @@ def renameFile(String basePath, String sourceName, String targetName)
 def updateFileNameChangeReferences(String sourcePath, String fileName, String oldReference, String newReference)
 {
    try {
-	   String cmd="sed -i " + "s/" + oldReference + "/" + newReference + "/g " + sourcePath/fileName
+	   String cmd="sed -i " + "s/" + oldReference + "/" + newReference + "/g " + sourcePath + "/" + fileName
 	   println "cmd=${cmd}"
            println  sh(script:cmd, returnStdout:true).trim()
        } catch (Exception ex) {
