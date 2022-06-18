@@ -89,7 +89,7 @@ def generateWickedCLIReport(String dirName = ".") {
 		// Add logic to change files names
 		// twistlock-20220517-<microservice>-<RELbuildversion>
 		
-		String results_file=findFileWithExtension("/tmp/${jobName}", "*.results.csv")
+		String results_file=findFileWithExtension("/tmp/${jobName}", ".results.csv")
 		
 		println "File found ${results_file}"
 		
@@ -115,10 +115,10 @@ String findFileWithExtension(String path, String ext)
 {
   String fileName, fileNamePart
   try {
-	fileName = sh(script:"ls ${path}/${ext}", returnStdout:true).trim()
+	fileName = sh(script:"ls ${path}/*${ext}", returnStdout:true).trim()
 	fileNamePart=fileName.substring(0, fileName.indexOf(ext))
      } catch (Exception ex) {
-	println("Failed to search file with extension ${ext} on ${path} : ${ex}")
+	println("Failed to search file with extension *${ext} on ${path} : ${ex}")
      }
    return fileNamePart
  }
