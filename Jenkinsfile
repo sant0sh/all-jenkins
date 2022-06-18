@@ -114,6 +114,12 @@ def generateWickedCLIReport(String dirName = ".") {
 
 }
 
+/**
+ * Searches the file with extension.
+ * @param path The path where the file is expected
+ * @param ext File extension to be searched. It should help to find a single file.
+ * @return string File name
+ */
 String findFileWithExtension(String path, String ext)
 {
   String fileName
@@ -122,19 +128,23 @@ String findFileWithExtension(String path, String ext)
 	String fileNamePart2 = fileNamePart1.substring(0, fileNamePart1.indexOf(ext))
         int lastSlashIndex = fileNamePart2.lastIndexOf('/') + 1
         fileName = fileNamePart2.substring(lastSlashIndex)
-  
      } catch (Exception ex) {
 	println("Failed to search file with extension *${ext} on ${path} : ${ex}")
      }
    return fileName
  }
 
+/**
+ * Get date stamp from the twistlock file name.
+ * @param fileName Twistlock file name
+ * @return string date stamp
+ */
 String getDateStampFromTwistlockFile(String fileName)
 {
    String dateStamp
    try {
         def splitValues = fileName.split('-')
-        dateStamp=splitValues[3]
+        dateStamp = splitValues[3]
      } catch (Exception ex) {
 	   println("Failed to extract data stamp from the file ${fileName} : ${ex}")
      }
