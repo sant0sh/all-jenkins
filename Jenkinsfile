@@ -98,15 +98,9 @@ def generateWickedCLIReport(String dirName = ".") {
 		(microServiceName, version) = getMicroServiceNameAndVersion(imageName)
 		println "Microservice : name ${microServiceName} and Version ${version}"
 		
-		//sh "`ls /tmp/${jobName}/*.results.csv` > /tmp/${jobName}/kk.txt"
-		//sh "cat /tmp/${jobName}/kk.txt"
-		//sh "common_file_name=\"`ls /tmp/${jobName}/*.results.csv`\";echo ${common_file_name};ren $common_file_name twistlock-$(date +'%y%m%d')-${imageName}-${overrideTag}.results.csv"
-		//sh "common_file_name=`ls /tmp/${jobName}/*.metadata.csv`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%y%m%d')-${imageName}-${overrideTag}.metadata.csv"
-	        //sh "common_file_name=`ls /tmp/${jobName}/*.overview.csv`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%y%m%d')-${imageName}-${overrideTag}.overview.csv"
-	        //sh "common_file_name=`ls /tmp/${jobName}/*.json`; echo ${common_file_name} ; ren $common_file_name twistlock-$(date +'%y%m%d')-${imageName}-${overrideTag}.json"
 	
 		//
-		//publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "/tmp/${jobName}", reportFiles: "**/*", reportName: "TwistlockScanReport-${imageName}"])
+		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "/tmp/${jobName}", reportFiles: "**/*", reportName: "TwistlockReport-${microServiceName}-${version}"])
 		
 	} catch (e) {
 		//sh "cat wicked_cli.log"
