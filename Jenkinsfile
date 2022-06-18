@@ -159,16 +159,15 @@ def renameFile(String basePath, String sourceName, String targetName)
 
 def renameTwistlockResults(String sourcePath, String imageName)
 {
-	def fileExtension = [".metadata.csv", ".overview.csv", ".results.csv", ".json"]
-	
-	for (int i=0, length=${fileExtension}.size(); i < length; i++) {
-	    String reportFile=findFileWithExtension(${sourcePath}, ${fileExtension[i]})
-	    String dateStamp = getDateStampFromTwistlockFile(${reportFile})
-	    println "Date stamp on file name ${dateStamp}"
-	    String microServiceName, version
-	    (microServiceName, version) = getMicroServiceNameAndVersion(imageName)
-	    println "Microservice : name ${microServiceName} and Version ${version}"
-	    renameFile(${sourcePath}, "${reportFile}${fileExtension[i]}", "twistlock-${dateStamp}-${microServiceName}-${version}${fileExtension[i]}")
+     def fileExtension = [".metadata.csv", ".overview.csv", ".results.csv", ".json"]
+     for (int i = 0; i < fileExtension.size(); i++) {
+         String reportFile=findFileWithExtension(${sourcePath}, ${fileExtension[i]})
+	 String dateStamp = getDateStampFromTwistlockFile(${reportFile})
+	 println "Date stamp on file name ${dateStamp}"
+	 String microServiceName, version
+	 (microServiceName, version) = getMicroServiceNameAndVersion(imageName)
+	 println "Microservice : name ${microServiceName} and Version ${version}"
+	 renameFile(${sourcePath}, "${reportFile}${fileExtension[i]}", "twistlock-${dateStamp}-${microServiceName}-${version}${fileExtension[i]}")
 	}
 }
 
