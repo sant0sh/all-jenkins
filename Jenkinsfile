@@ -68,12 +68,11 @@ def generateWickedCLIReport(String dirName = ".") {
 	
 	String jobName = "Dev_${BUILD_ID}"
 	String overrideTag = "Rel_98"
-	String imageName= "actions"
+	String imageName= "sec-cloud-identity-builds-docker-local.artifactory.swg-devops.com/actions:Rel_98"
 	String gitWorkspace= "/var/jenkins_home/workspace/TestPipelinesJob@script"
 	dirName = dirName.trim()
 	jobName = jobName.trim().replaceAll(" ", "_")
 	String resultsWorkspace= "/tmp/fedramp-compliance-scans/fedramp_compliance_scans"
-	String imageName="sec-cloud-identity-builds-docker-local.artifactory.swg-devops.com/actions:Rel_98"
 	
 	try {
 		sh "env"
