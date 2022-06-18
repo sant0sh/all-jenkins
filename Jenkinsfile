@@ -98,7 +98,8 @@ def generateWickedCLIReport(String dirName = ".") {
 		(microServiceName, version) = getMicroServiceNameAndVersion(imageName)
 		println "Microservice : name ${microServiceName} and Version ${version}"
 		
-	
+		renameFile("/tmp/${jobName}", ${results_file}".results.csv", "twistlock-${dateStamp}-${microServiceName}-${version}.results.csv")
+		
 		//
 		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, escapeUnderscores: false, reportDir: "/tmp/${jobName}", reportFiles: "**/*", reportName: "TwistlockReport-${microServiceName}-${version}"])
 		
