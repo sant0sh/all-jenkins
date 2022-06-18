@@ -91,8 +91,7 @@ def generateWickedCLIReport(String dirName = ".") {
 		
 		String results_file=findFileWithExtension("/tmp/${jobName}", "*.results.csv")
 		
-		println "File found"
-		println results_file
+		println "File found ${results_file}"
 		
 		//sh "`ls /tmp/${jobName}/*.results.csv` > /tmp/${jobName}/kk.txt"
 		//sh "cat /tmp/${jobName}/kk.txt"
@@ -112,7 +111,6 @@ def generateWickedCLIReport(String dirName = ".") {
 
 }
 
-@NonCPS
 String findFileWithExtension(String path, String ext)
 {
 try {
