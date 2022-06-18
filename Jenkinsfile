@@ -158,6 +158,17 @@ def renameFile(String basePath, String sourceName, String targetName)
      }
 }
 
+def updateFileNameChangeReferences(String basePath, String fileName, String oldReference, String newReference)
+{
+   try {
+	   String cmd="sed -i " + "s/$oldReference/$newReference/g " + $basePath/$fileName
+	   println "cmd=${cmd}
+           println  sh(script:cmd, returnStdout:true).trim()
+       } catch (Exception ex) {
+	   println("Failed to update reference text ${newReference} in file ${basePath}/${fileName} : ${ex}")
+     }
+}
+
 def renameTwistlockResults(String sourcePath, String  microServiceName, String version)
 {
      def fileExtension = [".metadata.csv", ".overview.csv", ".results.csv", ".json"]
@@ -165,7 +176,9 @@ def renameTwistlockResults(String sourcePath, String  microServiceName, String v
          String reportFile=findFileWithExtension(sourcePath, fileExtension[i])
 	 String dateStamp = getDateStampFromTwistlockFile(reportFile)
 	 println "Date stamp on file name ${dateStamp}"
-	 renameFile(sourcePath, reportFile + fileExtension[i], "twistlock-" + dateStamp + "-" + microServiceName + "-" + version + fileExtension[i])
+	 String shortName="twistlock-" + dateStamp + "-" + microServiceName + "-" + version + fileExtension[i]
+	 renameFile(sourcePath, reportFile + fileExtension[i], shortName)
+	 updateFileNameChangeReferences(sourcePath, shortName, reportFile, "twistlock-" + dateStamp + "-" + microServiceName + "-" + version)
 	}
 }
 
