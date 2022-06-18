@@ -89,17 +89,8 @@ def generateWickedCLIReport(String dirName = ".") {
 		// Add logic to change files names
 		// twistlock-20220517-<microservice>-<RELbuildversion>
 		
-		String results_file=findFileWithExtension("/tmp/${jobName}", ".results.csv")
-		
-		println "File found ${results_file}"
-		String dateStamp = getDateStampFromTwistlockFile(results_file)
-		println "Date stamp on file name ${dateStamp}"
-		String microServiceName, version
-		(microServiceName, version) = getMicroServiceNameAndVersion(imageName)
-		println "Microservice : name ${microServiceName} and Version ${version}"
-		
-		renameFile("/tmp/${jobName}", "${results_file}.results.csv", "twistlock-${dateStamp}-${microServiceName}-${version}.results.csv")
-		
+		renameTwistlockResults("/tmp/${jobName}", imageName)
+	        
 		//
 		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, escapeUnderscores: false, reportDir: "/tmp/${jobName}", reportFiles: "**/*", reportName: "TwistlockReport-${microServiceName}-${version}"])
 		
@@ -164,6 +155,22 @@ def renameFile(String basePath, String sourceName, String targetName)
        } catch (Exception ex) {
 	   println("Failed to rename file ${basePath}/${sourceName} to ${basePath}/${targetName} : ${ex}")
      }
+}
+
+def renameTwistlockResults(String sourcePath, String imageName)
+{
+	String fileExtension[] = [".metadata.csv", ".overview.csv", ".results.csv", ".json"]
+	
+	for (int i = 0, length = fileExtension.length; i < length; i++) {
+	    String reportFile=findFileWithExtension(${sourcePath}, ${fileExtension[i]})
+	    String dateStamp = getDateStampFromTwistlockFile(reportFile)
+	    println "Date stamp on file name ${dateStamp}"
+	    String microServiceName, version
+	    (microServiceName, version) = getMicroServiceNameAndVersion(imageName)
+	    println "Microservice : name ${microServiceName} and Version ${version}"
+	    renameFile(${sourcePath}, "${reportFile}${fileExtension[i]}", "twistlock-${dateStamp}-${microServiceName}-${version}${fileExtension[i]}")
+	    renameFile(${sourcePath}, "${reportFile}${fileExtension[i]}", "twistlock-${dateStamp}-${microServiceName}-${version}${fileExtension[i]}")
+	}
 }
 
 // Main starts here
