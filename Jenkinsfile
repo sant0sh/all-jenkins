@@ -152,7 +152,7 @@ def getMicroServiceNameAndVersion(String imageName)
 	String microServiceNameAndVersion=imageName.substring(imageName.lastIndexOf('/') + 1)
 	String microServiceName=microServiceNameAndVersion.split(':')[0]
 	String version=microServiceNameAndVersion.split(':')[1]
-	return [microServiceName, version]
+	return [microServiceName.trim(), version.trim()]
 }
 // Main starts here
 
