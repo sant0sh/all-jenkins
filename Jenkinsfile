@@ -115,18 +115,13 @@ def generateWickedCLIReport(String dirName = ".") {
 @NonCPS
 String findFileWithExtension(String path, String ext)
 {
-     String fileName="None"
-     new File(path).traverse(type: FILES) { it ->
-     fileName=it.getName()
-     println "file is:"
-     println fileName
-     if(fileName.endsWith(ext))
-     {
-	 println "file is found:"
-	 println fileName
-         return fileName
-     }
-    }
+try {
+	def dir1 = sh(script:'ls ${path}/${ext}', returnStdout:true).trim()
+	println dir1
+	return dir1
+} catch (Exception ex) {
+    println("Failed : ${ex}")
+}
 }
 
 // Main starts here
