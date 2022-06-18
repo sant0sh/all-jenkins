@@ -73,6 +73,7 @@ def generateWickedCLIReport(String dirName = ".") {
 	dirName = dirName.trim()
 	jobName = jobName.trim().replaceAll(" ", "_")
 	String resultsWorkspace= "/tmp/fedramp-compliance-scans/fedramp_compliance_scans"
+	String imageName="sec-cloud-identity-builds-docker-local.artifactory.swg-devops.com/actions:Rel_98"
 	
 	try {
 		sh "env"
@@ -94,7 +95,8 @@ def generateWickedCLIReport(String dirName = ".") {
 		println "File found ${results_file}"
 		String dateStamp = getDateStampFromTwistlockFile(results_file)
 		println "Date stamp on file name ${dateStamp}"
-		
+		[microServiceName, version] = getMicroServiceNameAndVersion(imageName)
+		println "Microservice : name ${microServiceName} and Version ${version}"
 		
 		//sh "`ls /tmp/${jobName}/*.results.csv` > /tmp/${jobName}/kk.txt"
 		//sh "cat /tmp/${jobName}/kk.txt"
@@ -153,9 +155,10 @@ String getDateStampFromTwistlockFile(String fileName)
 
 def getMicroServiceNameAndVersion(String imageName)
 {
-	imageName="sec-cloud-identity-builds-docker-local.artifactory.swg-devops.com/actions:Rel_98"
-	
-	
+	String microServiceNameAndVersion=imageName.substring(imageName.lastIndexOf('/') + 1)
+	String microServiceName=microServiceNameAndVersion.split(':')[0]
+	String version=microServiceNameAndVersion.split(':')[1]
+	return [microServiceName, version]
 }
 // Main starts here
 
