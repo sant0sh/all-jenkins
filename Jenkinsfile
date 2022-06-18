@@ -120,6 +120,7 @@ String findFileWithExtension(String path, String ext)
      } catch (Exception ex) {
 	println("Failed to search file with extension ${ext} on ${path} : ${ex}")
      }
+   return fileNamePart
  }
 
 // Main starts here
