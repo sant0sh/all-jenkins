@@ -110,7 +110,7 @@ def generateWickedCLIReport(String dirName = ".") {
  * @param ext File extension to be searched. It should help to find a single file.
  * @return string File name
  */
-def findFileWithExtension(String path, String nameStartsWith, String ext)
+def findFileWithExtension(def path, def nameStartsWith, def ext)
 {
   def fileName = ''
   try {
@@ -129,7 +129,7 @@ def findFileWithExtension(String path, String nameStartsWith, String ext)
  * @param fileName Twistlock file name
  * @return string date stamp
  */
-def getDateStampFromTwistlockFile(String fileName)
+def getDateStampFromTwistlockFile(def fileName)
 {
    def dateStamp = ''
    try {
@@ -141,7 +141,7 @@ def getDateStampFromTwistlockFile(String fileName)
    return dateStamp
 }
 
-def getMicroServiceNameAndVersion(String imageName)
+def getMicroServiceNameAndVersion(def imageName)
 {
 	def microServiceNameAndVersion=imageName.substring(imageName.lastIndexOf('/') + 1)
 	def microServiceName=microServiceNameAndVersion.split(':')[0]
@@ -150,7 +150,7 @@ def getMicroServiceNameAndVersion(String imageName)
 }
 
 
-def renameFile(String basePath, String sourceName, String targetName)
+def renameFile(def basePath, def sourceName, def targetName)
 {
    try {
          println sh(script:"mv ${basePath}/${sourceName} ${basePath}/${targetName}", returnStdout:true).trim()
@@ -159,7 +159,7 @@ def renameFile(String basePath, String sourceName, String targetName)
      }
 }
 
-def updateFileNameChangeReferences(String sourcePath, String fileName, String oldReference, String newReference)
+def updateFileNameChangeReferences(def sourcePath, def fileName, def oldReference, def newReference)
 {
    try {
 	   def cmd="sed -i " + "s/" + oldReference + "/" + newReference + "/g " + sourcePath + "/" + fileName
@@ -170,7 +170,7 @@ def updateFileNameChangeReferences(String sourcePath, String fileName, String ol
      }
 }
 
-def renameTwistlockResults(String sourcePath, String  microServiceName, String version)
+def renameTwistlockResults(def sourcePath, def  microServiceName, def version)
 {
      def fileExtension = [".metadata.csv", ".overview.csv", ".results.csv", ".json"]
      def nameStartsWith = "twistlock"
