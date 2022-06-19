@@ -77,7 +77,8 @@ def generateWickedCLIReport(String dirName = ".") {
 	try {
 		sh "env"
 		sh "pwd"
-		sh "rm -rf /tmp/Dev_*; mkdir -p /tmp/${jobName}"
+		def jobPath="/tmp/${jobName}"
+		sh "rm -rf /tmp/Dev_*; mkdir -p ${jobPath}"
 		sh "rm -rf ${WORKSPACE}; mkdir -p ${WORKSPACE}"
 		sh "ls ${gitWorkspace}/*/"
 		
@@ -90,10 +91,10 @@ def generateWickedCLIReport(String dirName = ".") {
 		// twistlock-20220517-<microservice>-<RELbuildversion>
 	        String microServiceName = '', version = ''
 	        (microServiceName, version) = getMicroServiceNameAndVersion(imageName)
-	        renameTwistlockResults("/tmp/${jobName}", microServiceName, version)
+	        renameTwistlockResults(jobPath, microServiceName, version)
 	        
 		//
-		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, escapeUnderscores: false, reportDir: "/tmp/${jobName}", reportFiles: "**/*", reportName: "TwistlockReport-${microServiceName}-${version}"])
+		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, escapeUnderscores: false, reportDir: jobPath, reportFiles: "**/*", reportName: "TwistlockReport-${microServiceName}-${version}"])
 		
 	} catch (e) {
 		//sh "cat wicked_cli.log"
