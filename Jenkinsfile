@@ -109,11 +109,11 @@ def generateWickedCLIReport(String dirName = ".") {
  * @param ext File extension to be searched. It should help to find a single file.
  * @return string File name
  */
-String findFileWithExtension(String path, String ext)
+String findFileWithExtension(String path, String nameStartsWith, String ext)
 {
   String fileName
   try {
-	String fileNamePart1 = sh(script:"ls ${path}/*${ext}", returnStdout:true).trim()
+	  String fileNamePart1 = sh(script:"ls ${path}/${nameStartsWith}*${ext}", returnStdout:true).trim()
 	String fileNamePart2 = fileNamePart1.substring(0, fileNamePart1.indexOf(ext))
         int lastSlashIndex = fileNamePart2.lastIndexOf('/') + 1
         fileName = fileNamePart2.substring(lastSlashIndex)
@@ -172,13 +172,14 @@ def updateFileNameChangeReferences(String sourcePath, String fileName, String ol
 def renameTwistlockResults(String sourcePath, String  microServiceName, String version)
 {
      def fileExtension = [".metadata.csv", ".overview.csv", ".results.csv", ".json"]
+     def nameStartsWith = "twistlock"
      for (int i = 0; i < fileExtension.size(); i++) {
-         String reportFile=findFileWithExtension(sourcePath, fileExtension[i])
+         String reportFile=findFileWithExtension(sourcePath, nameStartsWith, fileExtension[i])
 	 String dateStamp = getDateStampFromTwistlockFile(reportFile)
 	 println "Date stamp on file name ${dateStamp}"
 	 String shortName="twistlock-" + dateStamp + "-" + microServiceName + "-" + version + fileExtension[i]
 	 renameFile(sourcePath, reportFile + fileExtension[i], shortName)
-	 updateFileNameChangeReferences(sourcePath, shortName, reportFile, "twistlock-" + dateStamp + "-" + microServiceName + "-" + version)
+	 updateFileNameChangeReferences(sourcePath, shortName, reportFile, nameStartsWith + "-" + dateStamp + "-" + microServiceName + "-" + version)
 	}
 }
 
