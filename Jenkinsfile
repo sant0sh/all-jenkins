@@ -114,11 +114,11 @@ String findFileWithExtension(String path, String nameStartsWith, String ext)
   String fileName
   try {
 	  String fileNamePart1 = sh(script:"ls ${path}/${nameStartsWith}*${ext}", returnStdout:true).trim()
-	String fileNamePart2 = fileNamePart1.substring(0, fileNamePart1.indexOf(ext))
-        int lastSlashIndex = fileNamePart2.lastIndexOf('/') + 1
-        fileName = fileNamePart2.substring(lastSlashIndex)
-     } catch (Exception ex) {
-	println("Failed to search file with extension *${ext} on ${path} : ${ex}")
+	  String fileNamePart2 = fileNamePart1.substring(0, fileNamePart1.indexOf(ext))
+          int lastSlashIndex = fileNamePart2.lastIndexOf('/') + 1
+          fileName = fileNamePart2.substring(lastSlashIndex)
+     } catch (Exception e) {
+	echo "Failed to search file with extension *${ext} on ${path} " + e.toString()
      }
    return fileName
  }
@@ -134,8 +134,8 @@ String getDateStampFromTwistlockFile(String fileName)
    try {
         def splitValues = fileName.split('-')
         dateStamp = splitValues[3]
-     } catch (Exception ex) {
-	   println("Failed to extract data stamp from the file ${fileName} : ${ex}")
+     } catch (Exception e) {
+	echo "Failed to extract data stamp from the file ${fileName} " + e.toString()
      }
    return dateStamp
 }
@@ -153,8 +153,8 @@ def renameFile(String basePath, String sourceName, String targetName)
 {
    try {
          println  sh(script:"mv ${basePath}/${sourceName} ${basePath}/${targetName}", returnStdout:true).trim()
-       } catch (Exception ex) {
-	   println("Failed to rename file ${basePath}/${sourceName} to ${basePath}/${targetName} : ${ex}")
+       } catch (Exception e) {
+	 echo "Failed to rename file ${basePath}/${sourceName} to ${basePath}/${targetName} " e.toString()
      }
 }
 
@@ -164,8 +164,8 @@ def updateFileNameChangeReferences(String sourcePath, String fileName, String ol
 	   String cmd="sed -i " + "s/" + oldReference + "/" + newReference + "/g " + sourcePath + "/" + fileName
 	   println "cmd=${cmd}"
            println  sh(script:cmd, returnStdout:true).trim()
-       } catch (Exception ex) {
-	   println("Failed to update reference text ${newReference} in file ${sourcePath}/${fileName} : ${ex}")
+       } catch (Exception e) {
+	 echo "Failed to update reference text ${newReference} in file ${sourcePath}/${fileName} " + e.toString()
      }
 }
 
