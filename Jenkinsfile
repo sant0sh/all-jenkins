@@ -1,9 +1,9 @@
 import com.cloudbees.groovy.cps.NonCPS
 import hudson.tasks.test.AbstractTestResultAction
 import hudson.model.*
-import groovy.io.FileType
-import hudson.FilePath
-import static groovy.io.FileType.FILES
+//import groovy.io.FileType
+//import hudson.FilePath
+//import static groovy.io.FileType.FILES
 
 Object msvc_variables = [
 	// Properties for the service job only.
