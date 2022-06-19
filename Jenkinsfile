@@ -89,7 +89,7 @@ def generateWickedCLIReport(String dirName = ".") {
 		sh "ls /tmp/${jobName}/"
 		// Add logic to change files names
 		// twistlock-20220517-<microservice>-<RELbuildversion>
-	        String microServiceName = '', version = ''
+	        def microServiceName = '', version = ''
 	        (microServiceName, version) = getMicroServiceNameAndVersion(imageName)
 	        renameTwistlockResults(jobPath, microServiceName, version)
 	        
@@ -110,9 +110,9 @@ def generateWickedCLIReport(String dirName = ".") {
  * @param ext File extension to be searched. It should help to find a single file.
  * @return string File name
  */
-String findFileWithExtension(String path, String nameStartsWith, String ext)
+def findFileWithExtension(String path, String nameStartsWith, String ext)
 {
-  String fileName = ''
+  def fileName = ''
   try {
 	  String fileNamePart1 = sh(script:"ls ${path}/${nameStartsWith}*${ext}", returnStdout:true).trim()
 	  String fileNamePart2 = fileNamePart1.substring(0, fileNamePart1.indexOf(ext))
@@ -129,9 +129,9 @@ String findFileWithExtension(String path, String nameStartsWith, String ext)
  * @param fileName Twistlock file name
  * @return string date stamp
  */
-String getDateStampFromTwistlockFile(String fileName)
+def getDateStampFromTwistlockFile(String fileName)
 {
-   String dateStamp = ''
+   def dateStamp = ''
    try {
         def splitValues = fileName.split('-')
         dateStamp = splitValues[3]
@@ -143,9 +143,9 @@ String getDateStampFromTwistlockFile(String fileName)
 
 def getMicroServiceNameAndVersion(String imageName)
 {
-	String microServiceNameAndVersion=imageName.substring(imageName.lastIndexOf('/') + 1)
-	String microServiceName=microServiceNameAndVersion.split(':')[0]
-	String version=microServiceNameAndVersion.split(':')[1]
+	def microServiceNameAndVersion=imageName.substring(imageName.lastIndexOf('/') + 1)
+	def microServiceName=microServiceNameAndVersion.split(':')[0]
+	def version=microServiceNameAndVersion.split(':')[1]
 	return [microServiceName.trim(), version.trim()]
 }
 
@@ -162,7 +162,7 @@ def renameFile(String basePath, String sourceName, String targetName)
 def updateFileNameChangeReferences(String sourcePath, String fileName, String oldReference, String newReference)
 {
    try {
-	   String cmd="sed -i " + "s/" + oldReference + "/" + newReference + "/g " + sourcePath + "/" + fileName
+	   def cmd="sed -i " + "s/" + oldReference + "/" + newReference + "/g " + sourcePath + "/" + fileName
 	   println "cmd=${cmd}"
            println  sh(script:cmd, returnStdout:true).trim()
        } catch (Exception e) {
@@ -175,10 +175,10 @@ def renameTwistlockResults(String sourcePath, String  microServiceName, String v
      def fileExtension = [".metadata.csv", ".overview.csv", ".results.csv", ".json"]
      def nameStartsWith = "twistlock"
      for (int i = 0; i < fileExtension.size(); i++) {
-         String reportFile=findFileWithExtension(sourcePath, nameStartsWith, fileExtension[i])
-	 String dateStamp = getDateStampFromTwistlockFile(reportFile)
+         def reportFile=findFileWithExtension(sourcePath, nameStartsWith, fileExtension[i])
+	 def dateStamp = getDateStampFromTwistlockFile(reportFile)
 	 println "Date stamp on file name ${dateStamp}"
-	 String shortName="twistlock-" + dateStamp + "-" + microServiceName + "-" + version + fileExtension[i]
+	 def shortName="twistlock-" + dateStamp + "-" + microServiceName + "-" + version + fileExtension[i]
 	 renameFile(sourcePath, reportFile + fileExtension[i], shortName)
 	 updateFileNameChangeReferences(sourcePath, shortName, reportFile, nameStartsWith + "-" + dateStamp + "-" + microServiceName + "-" + version)
 	}
