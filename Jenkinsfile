@@ -88,7 +88,7 @@ def generateWickedCLIReport(String dirName = ".") {
 		sh "ls /tmp/${jobName}/"
 		// Add logic to change files names
 		// twistlock-20220517-<microservice>-<RELbuildversion>
-	        String microServiceName, version
+	        String microServiceName = '', version = ''
 	        (microServiceName, version) = getMicroServiceNameAndVersion(imageName)
 	        renameTwistlockResults("/tmp/${jobName}", microServiceName, version)
 	        
@@ -111,7 +111,7 @@ def generateWickedCLIReport(String dirName = ".") {
  */
 String findFileWithExtension(String path, String nameStartsWith, String ext)
 {
-  String fileName
+  String fileName = ''
   try {
 	  String fileNamePart1 = sh(script:"ls ${path}/${nameStartsWith}*${ext}", returnStdout:true).trim()
 	  String fileNamePart2 = fileNamePart1.substring(0, fileNamePart1.indexOf(ext))
@@ -130,7 +130,7 @@ String findFileWithExtension(String path, String nameStartsWith, String ext)
  */
 String getDateStampFromTwistlockFile(String fileName)
 {
-   String dateStamp
+   String dateStamp = ''
    try {
         def splitValues = fileName.split('-')
         dateStamp = splitValues[3]
@@ -152,7 +152,7 @@ def getMicroServiceNameAndVersion(String imageName)
 def renameFile(String basePath, String sourceName, String targetName)
 {
    try {
-         println  sh(script:"mv ${basePath}/${sourceName} ${basePath}/${targetName}", returnStdout:true).trim()
+         println sh(script:"mv ${basePath}/${sourceName} ${basePath}/${targetName}", returnStdout:true).trim()
        } catch (Exception e) {
 	 echo "Failed to rename file ${basePath}/${sourceName} to ${basePath}/${targetName} " e.toString()
      }
