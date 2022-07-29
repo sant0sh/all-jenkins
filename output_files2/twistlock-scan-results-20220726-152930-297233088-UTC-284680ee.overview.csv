@@ -1,0 +1,25 @@
+"images"
+
+"","all"
+"","count:1","image#","image"
+"","","1","registry.connect.redhat.com/ibm/couchdb3@sha256:6af02557f1f9e12ca4037be71804eb5dc4c53134b937278cb779e58b350afb53"
+
+"","resultsMissing"
+"","count:0"
+
+"","resultsExcluded"
+"","count:0"
+
+"","resultsIncluded.noScanErrors"
+"","count:1","image#","image"
+"","","1","registry.connect.redhat.com/ibm/couchdb3@sha256:6af02557f1f9e12ca4037be71804eb5dc4c53134b937278cb779e58b350afb53"
+
+"results"
+
+"","imagesIncluded"
+"","count:1","image#","image","complianceFailureSummary","vulnerabilityFailureSummary","scanTime","scanID","scanVersion","scanConsole","scanConsoleProject","scanIntelligenceTime","imagePullServer","imagePullServerHostname","elapsedTimeTwistlockAPIResults","elapsedTimeTwistcliScan","elapsedTimeDockerPull"
+"","","1","registry.connect.redhat.com/ibm/couchdb3@sha256:6af02557f1f9e12ca4037be71804eb5dc4c53134b937278cb779e58b350afb53","C:0|H:0|M:0|L:0|T:0","C:2|H:13|M:59|L:4|T:78","2022-07-26T15:29:54.418Z","62e00872a4be922d1fcd77b6","21.08.514","sc-public-4.cp-cts-twistlock.svc.cluster.local:8183","sc-public-4","2022-07-25T16:00:52.609Z","172.30.167.252","apipull-public-4","1 second","3 seconds","14 seconds"
+
+"","totals"
+"","complianceFailureSummary","C:0|H:0|M:0|L:0|T:0"
+"","vulnerabilityFailureSummary","C:2|H:13|M:59|L:4|T:78"
