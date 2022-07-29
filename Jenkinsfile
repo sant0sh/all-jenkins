@@ -45,7 +45,8 @@ def call (Object msvc_variables) {
     }
 	node
 	{
-          generateWickedCLIReport()
+          //generateWickedCLIReport()
+	  generateWickedCLIReport_forTag()
 
 	}
 }
@@ -103,6 +104,55 @@ def generateWickedCLIReport(String dirName = ".") {
 	}
 
 }
+
+
+def generateWickedCLIReport_forTag(String dirName = ".") {
+	
+	String jobName = "Dev_${BUILD_ID}"
+	
+	//String name="sec-cloud-identity-builds-docker-local.artifactory.swg-devops.com"
+	//String overrideTag = "Rel_98"
+	
+	String name="registry.connect.redhat.com/ibm/couchdb3@sha256"
+	String tag="6af02557f1f9e12ca4037be71804eb5dc4c53134b937278cb779e58b350afb53"
+	String imageName="${name}:${tag}"
+	
+	String gitWorkspace= "${WORKSPACE}@script"
+	dirName = dirName.trim()
+	jobName = jobName.trim().replaceAll(" ", "_")
+	String resultsWorkspace= "/tmp/fedramp-compliance-scans/fedramp_compliance_scans"
+	
+	try {
+		sh "env"
+		sh "pwd"
+		def jobPath="/tmp/${jobName}"
+		sh "rm -rf /tmp/Dev_*; mkdir -p ${resultsWorkspace}"
+		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}"
+		
+		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}/${jobName}"
+		sh "cp -r ${gitWorkspace}/*/* ${resultsWorkspace}/${jobName}/" 
+		sh "mkdir -p ${jobPath}"
+		sh "cp -r ${resultsWorkspace}/${jobName}/output_files/* ${jobPath}/"
+		sh "ls ${jobPath}/"
+		
+		// Add logic to change files names
+		// twistlock-20220517-<microservice>-<RELbuildversion>
+	        def microServiceName = '', version = ''
+	        (microServiceName, version) = getMicroServiceNameAndVersion(imageName)
+	        renameTwistlockResults(jobPath, microServiceName, version)
+	        
+		//
+		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, escapeUnderscores: false, reportDir: jobPath, reportFiles: "**/*", reportName: "TwistlockReport-${microServiceName}-${version}"])
+		
+	} catch (e) {
+		//sh "cat wicked_cli.log"
+		echo "Error: There were issues while generating the wicked cli scan report."
+		throw e
+	}
+
+}
+
+
 
 /**
  * Searches the file with extension.
