@@ -85,8 +85,9 @@ def generateWickedCLIReport(String dirName = ".") {
 		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}/${jobName}"
 		sh "cp -r ${gitWorkspace}/*/* ${resultsWorkspace}/${jobName}/" 
 		
-		sh "cp -r ${resultsWorkspace}/${jobName}/output_files/* /tmp/${jobName}/"
-		sh "ls /tmp/${jobName}/"
+		sh "cp -r ${resultsWorkspace}/${jobName}/output_files/* ${jobPath}/"
+		sh "ls ${jobPath}/"
+		
 		// Add logic to change files names
 		// twistlock-20220517-<microservice>-<RELbuildversion>
 	        def microServiceName = '', version = ''
