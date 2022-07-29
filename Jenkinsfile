@@ -132,7 +132,7 @@ def generateWickedCLIReport_forTag(String dirName = ".") {
 		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}/${jobName}"
 		sh "cp -r ${gitWorkspace}/*/* ${resultsWorkspace}/${jobName}/" 
 		sh "mkdir -p ${jobPath}"
-		sh "cp -r ${resultsWorkspace}/${jobName}/output_files/* ${jobPath}/"
+		sh "cp -r ${resultsWorkspace}/${jobName}/output_files2/* ${jobPath}/"
 		sh "ls ${jobPath}/"
 		
 		// Add logic to change files names
