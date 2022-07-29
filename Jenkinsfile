@@ -45,7 +45,7 @@ def call (Object msvc_variables) {
     }
 	node
 	{
-          //generateWickedCLIReport()
+          generateWickedCLIReport_overrideTag()
 	  generateWickedCLIReport_forTag()
 
 	}
@@ -65,7 +65,7 @@ void publishHTMLResults (String reportName, String reportsDir = ".", String file
  * @param dirName The name of the directory to scan
  * @return nothing
  */
-def generateWickedCLIReport(String dirName = ".") {
+def generateWickedCLIReport_overrideTag(String dirName = ".") {
 	
 	String jobName = "Dev_${BUILD_ID}"
 	String overrideTag = "Rel_98"
