@@ -69,7 +69,7 @@ def generateWickedCLIReport(String dirName = ".") {
 	String jobName = "Dev_${BUILD_ID}"
 	String overrideTag = "Rel_98"
 	String imageName= "sec-cloud-identity-builds-docker-local.artifactory.swg-devops.com/actions:Rel_98"
-	String gitWorkspace= "/var/jenkins_home/workspace/TestPipelinesJob@script"
+	String gitWorkspace= "${WORKSPACE}@script"
 	dirName = dirName.trim()
 	jobName = jobName.trim().replaceAll(" ", "_")
 	String resultsWorkspace= "/tmp/fedramp-compliance-scans/fedramp_compliance_scans"
@@ -78,13 +78,13 @@ def generateWickedCLIReport(String dirName = ".") {
 		sh "env"
 		sh "pwd"
 		def jobPath="/tmp/${jobName}"
-		//sh "rm -rf /tmp/Dev_*; mkdir -p ${jobPath}"
-		//sh "rm -rf ${WORKSPACE}; mkdir -p ${WORKSPACE}"
+		sh "rm -rf /tmp/Dev_*; mkdir -p ${resultsWorkspace}"
+		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}"
 		sh "ls ${gitWorkspace}/*/"
 		
-		sh "cp -r ${gitWorkspace}/*/* ${WORKSPACE}/" 
 		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}/${jobName}"
-		sh "ls ${WORKSPACE}"
+		sh "cp -r ${gitWorkspace}/*/* ${resultsWorkspace}/${jobName}/" 
+		
 		sh "cp -r ${WORKSPACE}/output_files/* /tmp/${jobName}/"
 		sh "ls /tmp/${jobName}/"
 		// Add logic to change files names
