@@ -78,8 +78,8 @@ def generateWickedCLIReport(String dirName = ".") {
 		sh "env"
 		sh "pwd"
 		def jobPath="/tmp/${jobName}"
-		#sh "rm -rf /tmp/Dev_*; mkdir -p ${jobPath}"
-		#sh "rm -rf ${WORKSPACE}; mkdir -p ${WORKSPACE}"
+		//sh "rm -rf /tmp/Dev_*; mkdir -p ${jobPath}"
+		//sh "rm -rf ${WORKSPACE}; mkdir -p ${WORKSPACE}"
 		sh "ls ${gitWorkspace}/*/"
 		
 		sh "cp -r ${gitWorkspace}/*/* ${WORKSPACE}/" 
