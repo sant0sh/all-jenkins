@@ -80,11 +80,10 @@ def generateWickedCLIReport(String dirName = ".") {
 		def jobPath="/tmp/${jobName}"
 		sh "rm -rf /tmp/Dev_*; mkdir -p ${resultsWorkspace}"
 		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}"
-		//sh "ls ${gitWorkspace}/*/"
 		
 		sh "rm -rf ${resultsWorkspace}; mkdir -p ${resultsWorkspace}/${jobName}"
 		sh "cp -r ${gitWorkspace}/*/* ${resultsWorkspace}/${jobName}/" 
-		
+		sh "mkdir -p ${jobPath}"
 		sh "cp -r ${resultsWorkspace}/${jobName}/output_files/* ${jobPath}/"
 		sh "ls ${jobPath}/"
 		
