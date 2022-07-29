@@ -95,7 +95,7 @@ def generateWickedCLIReport(String dirName = ".") {
 	        renameTwistlockResults(jobPath, microServiceName, version)
 	        
 		//
-		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, escapeUnderscores: false, reportDir: jobPath, reportFiles: "**/*", reportName: "TwistlockReport-${microServiceName}-${version}"])
+		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, escapeUnderscores: false, reportDir: jobPath, reportFiles: "**/*", reportName: "Twistlock-${microServiceName}-${version}"])
 		
 	} catch (e) {
 		//sh "cat wicked_cli.log"
@@ -142,7 +142,7 @@ def generateWickedCLIReport_forTag(String dirName = ".") {
 	        renameTwistlockResults(jobPath, microServiceName, version)
 	        
 		//
-		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, escapeUnderscores: false, reportDir: jobPath, reportFiles: "**/*", reportName: "TwistlockReport-${microServiceName}-${version}"])
+		publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, escapeUnderscores: false, reportDir: jobPath, reportFiles: "**/*", reportName: "Twistlock-${microServiceName}-${version}"])
 		
 	} catch (e) {
 		//sh "cat wicked_cli.log"
