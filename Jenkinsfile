@@ -42,7 +42,9 @@ return defaultParams
 def call (Object msvc_variables) {
     echo msvc_variables.toString()
     echo msvc_variables['service_job_properties']['env_vars']
+    echo msvc_variables['dependency_check_params']['scanPaths']
     echo msvc_variables['dependency_check_params']['cliParamas']
+    echo msvc_variables['dependency_check_params']['scanExcludePaths']
     //echo msvc_variables['service_job_properties']['input_params']
     
     if (msvc_variables['service_job_properties']['input_params'] != null && msvc_variables['service_job_properties']['input_params'] != "") {
