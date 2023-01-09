@@ -53,12 +53,15 @@ def call (Object msvc_variables) {
 	    print 'Adding parameter:' + param
         }
     }
-	/*node
+	node
 	{
-          generateWickedCLIReport_overrideTag()
-	  generateWickedCLIReport_forTag()
-
-	}*/
+	  String nodeLabel="ci-jnlp-agent"
+	  nodeBlock (nodeLabel)
+          {
+              generateWickedCLIReport_overrideTag()
+	      generateWickedCLIReport_forTag()
+	  }
+	}
 }
 
 /*
