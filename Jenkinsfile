@@ -21,9 +21,9 @@ Object msvc_variables = [
 	],
 	'dependency_check_params':
 	[
-	        'cliParamas': ["--disableNodeJS", "--disableNodeAudit", "--disableBundleAudit", "--disableYarnAudit", "--disableAssembly"],
-		'scanPaths' : ["Path1", "Path2", "Path3"],
-		'scanExcludePaths' : ["Path1", "Path2", "Path3"]
+	        'cliParamas': " --disableNodeJS --disableNodeAudit --disableBundleAudit --disableYarnAudit --disableAssembly",
+		'scanPaths' : " --scan Path1 --scan Path2 --scan Path3",
+		'scanExcludePaths' : " --exclude Path1 --exclude Path2 --exclude Path3"
 	]
 ]
 
