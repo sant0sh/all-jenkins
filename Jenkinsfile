@@ -51,12 +51,12 @@ def call (Object msvc_variables) {
 	    print 'Adding parameter:' + param
         }
     }
-	node
+	/*node
 	{
           generateWickedCLIReport_overrideTag()
 	  generateWickedCLIReport_forTag()
 
-	}
+	}*/
 }
 
 /*
